@@ -1,11 +1,12 @@
-import { UserService } from "./user.service";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { RouterModule } from "@angular/router";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from "@angular/fire/auth";
-import { RouterModule } from "@angular/router";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { AngularFireDatabaseModule } from "@angular/fire/database";
 
 import { environment } from "../environments/environment";
 
@@ -23,6 +24,8 @@ import { LoginComponent } from "./login/login.component";
 
 import { AuthService } from "./auth.service";
 import { AuthGuard } from "./auth-guard.service";
+import { UserService } from "./user.service";
+import { AdminAuthGuard } from "./admin-auth-guard.service";
 
 @NgModule({
   declarations: [
@@ -43,6 +46,7 @@ import { AuthGuard } from "./auth-guard.service";
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AngularFireDatabaseModule,
     NgbModule,
     RouterModule.forRoot([
       { path: "", component: HomeComponent },
@@ -65,16 +69,22 @@ import { AuthGuard } from "./auth-guard.service";
       {
         path: "admin/products",
         component: ProductsComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, AdminAuthGuard]
       },
       {
         path: "admin/orders",
         component: AdminOrdersComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, AdminAuthGuard]
       }
     ])
   ],
-  providers: [BrowserModule, AuthService, AuthGuard, UserService],
+  providers: [
+    BrowserModule,
+    AuthService,
+    AuthGuard,
+    UserService,
+    AdminAuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

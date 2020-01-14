@@ -40,8 +40,10 @@
         </a>
         <div ngbDropdownMenu aria-labelledby="navbarDropdown">
           <a ngbDropdownItem routerLInk="/my/orders">My Orders</a>
+
           <a ngbDropdownItem routerLInk="/admin/orders">Manage Orders</a>
           <a ngbDropdownItem routerLInk="/admin/products">Manage Products</a>
+
           <div class="dropdown-divider"></div>
           <a ngbDropdownItem (click)="logout()" id="logout">Log Out</a>
         </div>
