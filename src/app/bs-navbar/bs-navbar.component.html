@@ -39,10 +39,12 @@
           {{ user.displayName }}
         </a>
         <div ngbDropdownMenu aria-labelledby="navbarDropdown">
-          <a ngbDropdownItem routerLInk="/my/orders">My Orders</a>
+          <a ngbDropdownItem routerLink="/my/orders" class="drop-down-item"
+            >My Orders</a
+          >
 
-          <a ngbDropdownItem routerLInk="/admin/orders">Manage Orders</a>
-          <a ngbDropdownItem routerLInk="/admin/products">Manage Products</a>
+          <a ngbDropdownItem routerLink="/admin/orders">Manage Orders</a>
+          <a ngbDropdownItem routerLink="/admin/products">Manage Products</a>
 
           <div class="dropdown-divider"></div>
           <a ngbDropdownItem (click)="logout()" id="logout">Log Out</a>
