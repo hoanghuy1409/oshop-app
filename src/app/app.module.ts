@@ -1,3 +1,4 @@
+import { ShoppingCartService } from "./shopping-cart.service";
 import { ProductService } from "./product.service";
 import { CategoryService } from "./category.service";
 import { BrowserModule } from "@angular/platform-browser";
@@ -11,6 +12,7 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { CustomFormsModule } from "ng2-validation";
+// import { DataTableModule } from "angular-8-datatable";
 
 import { environment } from "../environments/environment";
 
@@ -31,6 +33,8 @@ import { AuthGuard } from "./auth-guard.service";
 import { UserService } from "./user.service";
 import { AdminAuthGuard } from "./admin-auth-guard.service";
 import { ProductFormComponent } from "./admin/product-form/product-form.component";
+import { ProductFilterComponent } from "./products/product-filter/product-filter.component";
+import { ProductCardComponent } from "./product-card/product-card.component";
 
 @NgModule({
   declarations: [
@@ -45,19 +49,22 @@ import { ProductFormComponent } from "./admin/product-form/product-form.componen
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductFilterComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     CustomFormsModule,
+    // DataTableModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireDatabaseModule,
     NgbModule,
     RouterModule.forRoot([
-      { path: "", component: HomeComponent },
+      { path: "", component: ProductsComponent },
       { path: "product", component: ProductsComponent },
       { path: "shopping-cart", component: ShoppingCartComponent },
       { path: "login", component: LoginComponent },
@@ -106,7 +113,8 @@ import { ProductFormComponent } from "./admin/product-form/product-form.componen
     UserService,
     AdminAuthGuard,
     CategoryService,
-    ProductService
+    ProductService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent]
 })
